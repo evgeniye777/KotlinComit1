@@ -6,4 +6,12 @@ fun main() {
     println(a)
     val b: Int = 5
     println(b + c)
+    typeDate()
+}
+
+fun typeDate() {
+    var a :Short = 67
+    val s: String = "bvdf"
+    var b: Boolean = true
+    println(b)
 }
