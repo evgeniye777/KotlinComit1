@@ -6,20 +6,14 @@ fun main() {
     println(a)
     val b: Int = 5
     println(b + c)
-    bit()
+    posled()
 }
 
-fun bit() {
+fun posled() {
+    
+    val a = 5
+    val b = a in 1..6       // true - число 5 входит в последовательность от 1 до 6
 
-    val z = 3 shl 2     // z = 11 << 2 = 1100
-    println(z)          // z = 12
-    val d = 0b11 shl 2
-    println(d)          // d = 12
-
-    val zp = 12 shr 2     // z = 1100 >> 2 = 11
-    println(z)          // z = 3
-    val dp = 0b1100 shr 2
-    println(d)          // d = 3
-
-    //ushr and or xor inv
+    val c = 4
+    val d = c in 11..15     // false - число 4 НЕ входит в последовательность от 11 до 15
 }
