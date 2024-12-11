@@ -22,4 +22,11 @@ fun bit() {
     println(d)          // d = 3
 
     //ushr and or xor inv
+    var an: Any
+    an = when (z) {
+        in 1..10 -> 50
+        in 11..20 -> 100
+        in 21..30 -> ""
+        else -> 200
+    }
 }
