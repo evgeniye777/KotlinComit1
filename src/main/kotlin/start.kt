@@ -1,32 +1,19 @@
 const val c: Int = 78
 fun main() {
-    println("1234")
-    var a: Int = 23
-    a = 24
-    println(a)
-    val b: Int = 5
-    println(b + c)
+    outerloop@ for(i in 1..3){
+        for(j in 1..3){
+            if(j == 3) break@outerloop; //выход именно из внешнего цикла который помечен
+            println("Hello")
+        }
+    }
     bit()
 }
 
 fun bit() {
-
-    val z = 3 shl 2     // z = 11 << 2 = 1100
-    println(z)          // z = 12
-    val d = 0b11 shl 2
-    println(d)          // d = 12
-
-    val zp = 12 shr 2     // z = 1100 >> 2 = 11
-    println(z)          // z = 3
-    val dp = 0b1100 shr 2
-    println(d)          // d = 3
-
-    //ushr and or xor inv
-    var an: Any
-    an = when (z) {
-        in 1..10 -> 50
-        in 11..20 -> 100
-        in 21..30 -> ""
-        else -> 200
+    for(i in 1..9){
+        for(j in 1..9){
+            print("${i * j} \t")
+        }
+        println()
     }
 }
