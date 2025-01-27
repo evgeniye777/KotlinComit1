@@ -1,19 +1,19 @@
-const val c: Int = 78
-fun main() {
-    outerloop@ for(i in 1..3){
-        for(j in 1..3){
-            if(j == 3) break@outerloop; //выход именно из внешнего цикла который помечен
-            println("Hello")
-        }
-    }
-    bit()
-}
+import kotlin.reflect.KProperty
 
-fun bit() {
-    for(i in 1..9){
-        for(j in 1..9){
-            print("${i * j} \t")
-        }
-        println()
+fun main() {
+
+    val tom = Person()
+    println(tom.name)   // Tom
+
+    val bob = Person()
+    println(bob.name)   // Tom
+}
+class Person{
+    val name: String by LoggerDelegate()
+}
+class LoggerDelegate {
+    operator fun getValue(thisRef: Person, property: KProperty<*>): String {
+        println("Запрошено свойство: ${property.name}")
+        return "Tom"
     }
 }
