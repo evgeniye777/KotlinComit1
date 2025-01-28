@@ -208,7 +208,7 @@ public class Mymetods {
                 else if (s.indexOf(String.valueOf((char) 9008))>=0) {i=150;} //две стрелки наклон+++
                 else if (s.indexOf(String.valueOf((char) 8978))>=0) {i=180;} //дуга+++
                 else if (s.indexOf(String.valueOf((char) 8979))>=0) {i=170;} //полуокружность+++//8241
-                else if (s.indexOf(String.valueOf((char) 8241))>=0) {i=210;} //%оо
+                else if (s.indexOf(String.valueOf((char) 8241))>=0) {i=210;} ///%оо
                 else {i=90;}
             }
             return i;
