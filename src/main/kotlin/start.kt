@@ -1,15 +1,24 @@
+import java.util.concurrent.CompletableFuture
+import java.util.regex.Pattern
 import kotlin.reflect.KProperty
+val month = "(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
 
+fun getPattern(): String = """\d{2} $month \d{4}"""
 fun main() {
-    println("1234")
-    var a: Int = 23
-    a = 24
-    println(a)
-    val b: Int = 5
-    println(b )
-    posled()
-}
+    val regex = getPattern()
 
+    // Пример строки для поиска
+    val text = "The event will be held on 15 MAR 2023 and 01 JAN 2024."
+
+    // Создаём Pattern и Matcher
+    val pattern = Pattern.compile(regex)
+    val matcher = pattern.matcher(text)
+
+    // Находим все соответствия
+    while (matcher.find()) {
+        println("vivod date: ${matcher.group()}")
+    }
+}
 fun posled() {
     
     val a = 5

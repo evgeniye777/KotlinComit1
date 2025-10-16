@@ -1,26 +1,132 @@
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+class SomeClass {
+    public static int i=1;
+}
 public class Mymetods {
     ///В этом классе будут записаны все оригинальные методы
 
     public static  void main(String[] args ) {
-        //СИЗ: Вкладыши (беруши) 9890Ван-ФитUVEX(2112045)SNR31 ГОСТ EN 352-2-
-        String str="";
-        kompanovkaClass komp = new kompanovkaClass();
-        List<kompanovkaClass.Revision> list = komp.kompanovkaKubik("Контроль 1");
-        for (kompanovkaClass.Revision r: list) {str+=r.getName();}
-        System.out.println(str+"  "+list.size());
+        System.out.print(getStudentRating("Анна,Математика,85;Анна,Химия,90;Борис,Математика,75;Борис,История,80;Евгений,Математика,95;Евгений,История,85","Математика,80"));
 
-        //System.out.println(""+MySizeString("5. Закрепить деталь под ∠ 90° Н ; ⌾ 0,8 ;[][][][][][]⌯ 0,002 Н Г, ⌖ 4,5 К ."));
     }
+    static public String getStudentRating(String studentData, String courseInfo) {
+        String[] studentMas = studentData.split(";");
+        String[][] list = new String[studentMas.length][];
+        for (int i=0;i<studentMas.length;i++) {
+            String[] dateOne = studentMas[i].split(",");
+            list[i] = dateOne;
+        }
+        String[] predmet = courseInfo.split(",");
+
+        String ret = "";
+        String[][] listRet = new String[0][];
+        listRet = sort2(list);
+        for (int i=0;i<list.length;i++) {
+            String[] dateOne = list[i];
+            int ballSt = Integer.parseInt(dateOne[2]);
+            int ballM = Integer.parseInt(predmet[1]);
+            if (dateOne[1].equals(predmet[0])&&ballSt>ballM) {
+                ret+=listRet[i][0]+","+listRet[i][2]+"\n";
+            }
+        }
+        return ret;
+    }
+
+    static String[][] sort2(String[][] mas) {
+        for (int i=0;i<mas.length-1;i++) {
+            int min = Integer.parseInt(mas[i][2]);
+            int im=0;
+            for (int j=0;j< mas.length;j++) {
+                int ball = Integer.parseInt(mas[i][2]);
+                if (ball>min) {min = ball;im=j;}
+            }
+            String[] b = mas[im];
+            mas[im] = mas[i];
+            mas[i] = b;
+        }
+        return mas;
+    }
+
+
+    public static String generateReport(String salesData) {
+        String[] oper = salesData.split(";");
+        String[][] list = new String[4][];
+        for (int i=0;i< oper.length;i++) {
+            String[] p = oper[i].split(":");
+            String[] date = p[0].split("-");
+            int m = Integer.parseInt(date[1]),nK=(m-1)/3;
+            String[] dK = list[nK];
+            if (dK==null) {
+                dK=new String[1];
+                dK[0] = "- "+p[1]+": "+p[2];
+            }
+            else {
+                boolean r = true;
+                for (int j=0;j<dK.length;j++) {
+                    String[] dKc = dK[j].split(" ");
+                    //System.out.println(String.join("_",dKc)+"   "+p[1]);
+                    if (dKc[1].equals(p[1]+":")) {
+                        dK[j] = "- "+p[1]+": "+(Integer.parseInt(dKc[2])+Integer.parseInt(p[2]));
+                        r=false;
+                    }
+                }
+                if (r) {
+                    dK = copyPlus(dK);
+                    dK[dK.length-1] = "- "+p[1]+": "+p[2];
+                }
+            }
+            list[nK] = dK;
+        }
+        String ret = "";
+        for (int i=0;i<list.length;i++) {
+            String[] dK = list[i];
+            if (dK!=null) {dK = sortMas(dK);
+            list[i] = dK;
+
+            ret+="Q"+(i+1)+"\n"+String.join("\n",list[i]);
+            if (i<list.length-1) {ret+="\n";}
+            }
+        }
+
+        return ret;
+    }
+
+    static public String[] sortMas(String[] mas) {
+        for (int i=0;i<mas.length-1;i++) {
+            String min = mas[i]; int im=0;
+            for (int j=i+1; j<mas.length;j++) {
+                if (min.compareTo(mas[j])>0) {min = mas[j];im=j;}
+            }
+            String b = mas[im];
+            mas[im] = mas[i];
+            mas[i] = b;
+        }
+        return mas;
+    }
+    static public String[] copyPlus(String[] mas) {
+        String[] mas2 =new String[mas.length+1];
+        for (int i=0;i<mas.length;i++) {
+            mas2[i] = mas[i];
+        }
+        return mas2;
+    }
+
+    public static class CustomComparator implements Comparator<String> {
+        @Override
+        public int compare(String row1, String row2) {
+            return row1.compareTo(row2);
+        }
+    }
+
     //Метод который может вычислять длину строки с учетом ширины букв
-    public float textLength(String text) {
+    public static float textLength(String text) {
         AffineTransform affinetransform = new AffineTransform();
         FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
         Font font = new Font("Tahoma", Font.PLAIN, 12);

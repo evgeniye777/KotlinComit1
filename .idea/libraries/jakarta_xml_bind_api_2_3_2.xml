@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jakarta.xml.bind-api-2.3.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jakarta.xml.bind-api-2.3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-api-5.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-engine-5.12.0-M1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/opentest4j-1.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

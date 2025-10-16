@@ -1,13 +1,30 @@
-import javafx.print.Printer;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class qwer {
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
-        System.out.print(taskManager.manageTasks("ADD,ПосетитьВстречу,2;REMOVE;ADD,ПрочитатьГазету,1;REMOVE;GET"));
+        System.out.println(foo());
     }
+    static int foo() {
+        try {
+            SomeClass someClass = null;
+            return someClass.i;
+        } catch (Exception e) {
+            return 2;
+        } catch (Throwable e) {
+            return 3;
+        } finally {
+            return 4;
+        }
+    }
+    public static void foo(Integer i) {System.out.println("Integer");}
+    public static void foo(short i) {System.out.println("short");}
+    public static void foo(long i) {System.out.println("long");}
+    public static void foo(Object i) {System.out.println("Object");}
+    public static void foo(int... i) {System.out.println("int...");}
     static class TaskManager {
         List<Zadacha> listZ = new ArrayList<>();
         public String manageTasks(String input) {
@@ -117,6 +134,52 @@ public class qwer {
         }
         public String getZ() {return z;}
         public int getP() {return p;}
+    }
+
+    public class Calculator {
+        public int add(int a, int b) {
+            return a + b;
+        }
+    }
+
+    public class CalculatorTest {
+
+        @Test
+        public void testAdd() {
+            Calculator calculator = new Calculator();
+
+            assertEquals(3, calculator.add(1, 2));
+            assertEquals(0, calculator.add(-1, 1));
+            assertEquals(-2, calculator.add(-1, -1));
+            assertEquals(0, calculator.add(0, 0));
+        }
+    }
+}
+
+class ShapeCalculator {
+    public String stroka(String input) {
+        String output = bottom(notChisla(revers(input)))+"LOG";
+        return output;
+    }
+
+    public String revers(String str) {
+        String reversAnswer = new StringBuilder(str).reverse().toString();
+        return reversAnswer;
+    }
+
+
+    public String notChisla(String str0) {
+        String str="",strCh="9182736405";
+        for (char c:str0.toCharArray()) {
+            if (!strCh.contains(""+c)) {
+                str+=c;
+            }
+        }
+        return str;
+    }
+    public String bottom(String str0) {
+        String str = str0.replaceAll(" ","_");
+        return str;
     }
 }
 
